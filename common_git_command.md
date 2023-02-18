@@ -1,7 +1,7 @@
-- github repository address:
+# Command git command
+
+- github repository address: ASS03
   - `https://github.com/simonangel-fong/ITC-5201-Java-Assignment03.git`
-
-
 
 ## 1. create directory
 
@@ -19,12 +19,14 @@
 
 ---
 
-## Configuration the remote repository
+## 3. Configuration the remote repository
 
 - Add remote url
-    - `git remote add ass03 https://github.com/simonangel-fong/ITC-5201-Java-Assignment03.git`
+  - `git remote add ass03 https://github.com/simonangel-fong/ITC-5201-Java-Assignment03.git`
 
-## 3. Create a new branch
+---
+
+## 4. Create a new branch
 
 - list branch
 
@@ -37,13 +39,13 @@
 
 ---
 
-## 4. add files and progam in the new branch
+## 5. add files and progam in the new branch
 
 not git command needed this stage.
 
 ---
 
-## 5. Commit new changes to local `git`
+## 6. Commit new changes to local `git`
 
 - When necessary work finished.
 
@@ -57,14 +59,23 @@ not git command needed this stage.
 
 ---
 
-## 6. Push the latest commit to github
+## 7. Push the latest commit to github
 
 - `git push ass03`
 
-## 7. Synchronize the local files in master branch with files on github
+## 8. Synchronize the local files in master branch with files on github
 
 - Switch to the master branch
+
   - `git checkout master`
 
-- Pull to local
-    - `git pull .`
+- Pull the master branch on Github to the local master branch to synchronize files.
+  - `git pull ass03 master:master`
+
+---
+
+## 8. New iteration: programming based on the synchoronized files.
+
+---
+
+[Top](#command-git-command)
