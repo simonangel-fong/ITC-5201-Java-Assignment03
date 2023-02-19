@@ -58,4 +58,19 @@
 
 ---
 
+## Version 1.001
+
+- `/`
+  - RandomFile.java (main)
+  - `business/`
+    - **Person.java**
+  - `presentation/`
+    - RandomFileUI.java
+  - `data/`
+    - **RandomIO.java**
+    - **RandomSignal.java**
+    - **RandomResponse.java**
+
+---
+
 [TOP](#itc-5201-java-assignment03)
