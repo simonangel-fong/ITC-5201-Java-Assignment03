@@ -5,7 +5,12 @@ import java.util.*;
 import business.*;
 
 /**
+ * ID: n01555914
+ * Name: Wenhao Fang
+ * 
  * This is a class represent the response sent from RandomIO to UI.
+ * 
+ * @author Wenhao Fang
  */
 public class RandomResponse {
     private RadomSignal signal;

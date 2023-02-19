@@ -1,7 +1,11 @@
 package business;
 
 /**
+ * ID: n01555914
+ * Name: Wenhao Fang
  * This is a class that represents a person.
+ * 
+ * @author Wenhao Fang
  */
 public class Person {
 

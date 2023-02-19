@@ -6,8 +6,13 @@ import java.util.*;
 import business.*;
 
 /**
+ * ID: n01555914
+ * Name: Wenhao Fang
+ * 
  * This is a class represent IO controller that reads, writes, and sends
  * response to UI.
+ * 
+ * @author Wenhao Fang
  */
 public class RandomIO {
 
