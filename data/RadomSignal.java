@@ -9,6 +9,7 @@ package data;
  * @author Wenhao Fang
  */
 public enum RadomSignal {
-    SUCCESS, // The signal when execute success
-    ERROR// The signal when execution meets exception
+    SUCCESS, // The signal when execution meets business logic without exception.
+    WARNING, // The signal when execution fails business logic without exception.
+    ERROR// The signal when execution raises exception.
 }

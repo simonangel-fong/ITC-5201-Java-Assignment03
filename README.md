@@ -71,6 +71,12 @@
     - **RandomSignal.java**
     - **RandomResponse.java**
 
+| Response    | Methods                    | Return Type                                                        |
+| ----------- | -------------------------- | ------------------------------------------------------------------ |
+| Get signal  | `response.getSignal()`     | `RandomSignal.SUCCESS`/`RandomSignal.WARNING`/`RandomSignal.ERROR` |
+| Get message | `response.getMessage()`    | `String`                                                           |
+| Get data    | `response.getPersonList()` | `ArrayList<Person>`                                                |
+
 ---
 
 [TOP](#itc-5201-java-assignment03)
