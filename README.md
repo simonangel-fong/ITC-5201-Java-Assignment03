@@ -6,8 +6,8 @@
 - Group: #03
 - Member:
   - Ansh Bhardwaj
-  - Tsz Kit Cheung
-  - Wenhao Fang
+  - Tsz Kit Cheung(Kevin)
+  - Wenhao Fang(Simon)
 
 ---
 
@@ -24,7 +24,7 @@
 - Package `presentation`:
   - GUI
     - Design
-      ![sample](./img/gui_sample.png)
+      ![sample](./gui_sample.png)
     - Validation
 - Package `data`:
 
@@ -39,37 +39,20 @@
 
 ---
 
-## Version 1.0
-
-1. Create baseline file structure:
+## Latest Version: 1.012
 
 - `/`
-  - RandomFile.java (main)
   - `business/`
-    - Person.java
-  - `presentation/`
-    - RandomFileUI.java
+    - Person.java(Simon)
   - `data/`
-    - RandomIO.java
-
-2. Synchronize file structure and requirement among group members.
-
-3. Share common git command.
+    - RandomIO.java(Simon)
+    - RandomSignal.java(Simon)
+    - RandomResponse.java(Simon)
+  - `presentation/`
+    - RandomUI.java(Kevin)
+  - **RandomDemo.java** (Kevin)
 
 ---
-
-## Version 1.001
-
-- `/`
-  - RandomFile.java (main)
-  - `business/`
-    - **Person.java**
-  - `presentation/`
-    - RandomFileUI.java
-  - `data/`
-    - **RandomIO.java**
-    - **RandomSignal.java**
-    - **RandomResponse.java**
 
 | Response    | Methods                    | Return Type                                                        |
 | ----------- | -------------------------- | ------------------------------------------------------------------ |

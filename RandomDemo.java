@@ -1,12 +1,25 @@
+
+import javax.swing.*;
+
 import data.*;
+import presentation.*;
 
 /**
- * This is a demo class with the main function of the application.
+ * Assignment: #03
+ * ID: n01555831
+ * Name: Tsz Kit Cheung (Kevin Cheung)
+ *
+ * @version v1.0
+ *          Controller
+ *
  */
 public class RandomDemo {
     private final static String PATH = "./data/RandomFileData.dat";
 
     public static void main(String[] args) {
-        RandomIO controller = new RandomIO(PATH);
+        JFrame frame = new RandomUI();
+        frame.setDefaultCloseOperation(3);
+        frame.setVisible(true);
+        // RandomIO controller = new RandomIO(PATH);
     }
 }
