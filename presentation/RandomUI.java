@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
-
+    
 /**
  * Assignment: #03
  * ID: n01555831
@@ -57,6 +57,7 @@ public class RandomUI extends JFrame {
     String phone;
 
     /**
+     * 
      * Main Statement
      * Provide frame settings and create main layout
      */
