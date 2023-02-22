@@ -109,7 +109,7 @@ public class Person {
      * Check the length of string. If less than a specific length, then pad blank
      * spaces to the right. Otherwise, trim the string to a specific length.
      * 
-     * @param lastName The phone of this person.
+     * @param //lastName The phone of this person.
      */
     public void setPhone(String phone) {
         this.phone = padString(phone, SIZE_PHONE);

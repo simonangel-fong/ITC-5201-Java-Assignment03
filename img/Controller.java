@@ -1,5 +1,4 @@
-package assessment.assignment03.v1_0;
-
+package img;
 import javax.swing.*;
 
 

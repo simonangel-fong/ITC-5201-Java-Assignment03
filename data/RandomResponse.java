@@ -17,7 +17,7 @@ public class RandomResponse {
     // region Private members
     private RadomSignal signal;
     private String message;
-    private ArrayList<Person> personList;
+    public ArrayList<Person> personList;
 
     // endregion
 
@@ -26,7 +26,7 @@ public class RandomResponse {
     /**
      * Default constuctor.
      */
-    RandomResponse() {
+    public RandomResponse() {
         this.signal = RadomSignal.ERROR;// Default signal.
         this.message = "";
     }
@@ -38,7 +38,8 @@ public class RandomResponse {
      * @param message    The message to pass to UI.
      * @param personList A list of persons.
      */
-    RandomResponse(RadomSignal signal, String message, ArrayList<Person> personList) {
+
+    public RandomResponse(RadomSignal signal, String message, ArrayList<Person> personList) {
         this.signal = signal;
         this.message = message;
         this.personList = personList;

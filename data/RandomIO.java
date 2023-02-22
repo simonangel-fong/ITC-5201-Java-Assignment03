@@ -27,7 +27,8 @@ public class RandomIO {
             + Person.SIZE_AGE;
 
     // Default path of file
-    private final String PATH = "./data/";
+    //private final String PATH = "./data/";
+    private final String PATH = "src/";
     private final String FILE_NAME = "RandomFileData.dat";
 
     private File file;
@@ -145,7 +146,7 @@ public class RandomIO {
     /**
      * Deletes all person.
      * 
-     * @param recordNum The record number of this person.
+     * @param //recordNum The record number of this person.
      * @return An obj of RandomResponse that indicates signal, message, and possible
      *         person data.
      */
@@ -174,7 +175,7 @@ public class RandomIO {
      * @throws Exception The exception raised while writing the file, including the
      *                   IOException, EOFexception, and any other Exception.
      */
-    private void writeFile(Person person) throws Exception {
+    public void writeFile(Person person) throws Exception {
 
         try (RandomAccessFile accessor = new RandomAccessFile(file, "rw")) {
 
@@ -286,7 +287,7 @@ public class RandomIO {
      * @throws Exception The exception raised while writing the file, including the
      *                   IOException, EOFexception, and any other Exception.
      */
-    private boolean isUnique(int recordNum) throws Exception {
+    public boolean isUnique(int recordNum) throws Exception {
         boolean result = true;
 
         try (RandomAccessFile accessor = new RandomAccessFile(file, "r")) {
