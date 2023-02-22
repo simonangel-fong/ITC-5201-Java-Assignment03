@@ -1,5 +1,5 @@
 # ITC-5201-Java-Assignment03
-
+    
 - Semester: #02
 - Course: ITC-5201-Java
 - Assignment: #03 - Binary I/O and Random File Processing
