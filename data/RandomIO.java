@@ -9,7 +9,8 @@ import business.*;
  * ID: n01555914
  * Name: Wenhao Fang
  * 
- * This is a class represents IO controller that reads and writes file, and sends
+ * This is a class represents IO controller that reads and writes file, and
+ * sends
  * response to UI.
  * 
  * @author Wenhao Fang
@@ -95,18 +96,21 @@ public class RandomIO {
             if (isUnique(person.getID())) {// check uniqueness
                 writeFile(person);// if true, write new person.
 
-                message = "Success\tAdd a new person with record number(%d).".formatted(person.getID());
+                message = String.format("<html><h3>Success</h3><p>Add a new person with record number (%d).</p></html>",
+                        person.getID());
                 return new RandomResponse(RadomSignal.SUCCESS, message, result);
             } else {
-                message = "Warning\tThe record number(%d) exists!".formatted(person.getID());
+                message = String.format("<html><h3>Warning</h3><p>The record number (%d) exists!</p></html>",
+                        person.getID());
                 return new RandomResponse(RadomSignal.WARNING, message, result);
             }
 
         } catch (Exception ex) {
             ex.printStackTrace();
 
-            message = String.format("Error\taddPerson(%d)\t%s",
-                    person.getID(), ex.getMessage());
+            message = String.format(
+                    "<html><h3>Error</h3><p>Fail to add a new person due to unexpected error!</p><p>%s</p></html>",
+                    ex.getMessage());
             return new RandomResponse(RadomSignal.ERROR, message, result);
         }
     }
@@ -127,18 +131,21 @@ public class RandomIO {
             if (person.getID() == recordNum) {
                 result.add(person);// if exists, add the return person obj.
 
-                message = "Success\tGet a person with record number(%d).".formatted(recordNum);
+                message = String.format("<html><h3>Success</h3><p>Get a new person with record number (%d).</p></html>",
+                        recordNum);
                 return new RandomResponse(RadomSignal.SUCCESS, message, result);
             } else {
-                message = "Warning\tNo person with record number(%d).".formatted(recordNum);
+                message = String.format("<html><h3>Warning</h3><p>No person  with record number (%d)!</p></html>",
+                        recordNum);
                 return new RandomResponse(RadomSignal.WARNING, message, result);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
 
-            message = String.format("Error\tfindPersion(%d)\t%s",
-                    recordNum, ex.getMessage());
-            return new RandomResponse(RadomSignal.ERROR, message, new ArrayList<>());
+            message = String.format(
+                    "<html><h3>Error</h3><p>Fail to find a new person due to unexpected error!</p><p>%s</p></html>",
+                    ex.getMessage());
+            return new RandomResponse(RadomSignal.ERROR, message, result);
         }
     }
 
@@ -153,12 +160,12 @@ public class RandomIO {
         try {
             truncatFile();
 
-            message = "Success\tDelete all rows.";
+            message = "<html><h3>Success</h3><p>Delete all rows.</p></html>";
             return new RandomResponse(RadomSignal.SUCCESS, message, new ArrayList<>());
         } catch (Exception ex) {
             ex.printStackTrace();
 
-            message = "Error\t%s.".formatted(ex.getMessage());
+            message = String.format("<html><h3>Error</h3><p>Delete all rows.</p></html>", ex.getMessage());
             return new RandomResponse(RadomSignal.ERROR, message, new ArrayList<>());
         }
     }
@@ -201,13 +208,9 @@ public class RandomIO {
     private ArrayList<Person> readFile() throws Exception {
         ArrayList<Person> result = new ArrayList<Person>();
 
-        try (RandomAccessFile accessor = new RandomAccessFile(file, "r")) {
+        try (RandomAccessFile accessor = new RandomAccessFile(file, "rw")) {
 
-            int sizePerPerson = Person.SIZE_FIRST_NAME + 2 + Person.SIZE_LAST_NAME + 2 + Person.SIZE_PHONE + 2
-                    + Person.SIZE_ID
-                    + Person.SIZE_AGE;
-
-            for (int i = 0; i < accessor.length(); i += sizePerPerson) {
+            for (int i = 0; i < accessor.length(); i += SIZE) {
                 Person person = new Person();
 
                 person.setID(accessor.readInt());
@@ -238,7 +241,7 @@ public class RandomIO {
     private Person readFile(int recordNum) throws Exception {
         Person result = new Person();
 
-        try (RandomAccessFile accessor = new RandomAccessFile(file, "r")) {
+        try (RandomAccessFile accessor = new RandomAccessFile(file, "rw")) {
 
             for (int i = 0; i < accessor.length(); i += SIZE) {
                 accessor.seek(i);// Set the current pointer for each iteration, to read the value of id properly.
@@ -289,7 +292,7 @@ public class RandomIO {
     private boolean isUnique(int recordNum) throws Exception {
         boolean result = true;
 
-        try (RandomAccessFile accessor = new RandomAccessFile(file, "r")) {
+        try (RandomAccessFile accessor = new RandomAccessFile(file, "rw")) {
             for (int i = 0; i < accessor.length(); i += SIZE) {
                 accessor.seek(i);// Set the current pointer for each iteration, to read the value of id properly.
                 if (accessor.readInt() == recordNum) {

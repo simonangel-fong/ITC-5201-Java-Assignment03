@@ -17,7 +17,7 @@ public class RandomDemo {
     private final static String PATH = "./data/RandomFileData.dat";
 
     public static void main(String[] args) {
-        JFrame frame = new RandomUI();
+        JFrame frame = new RandomUI(PATH);
         frame.setDefaultCloseOperation(3);
         frame.setVisible(true);
         // RandomIO controller = new RandomIO(PATH);
