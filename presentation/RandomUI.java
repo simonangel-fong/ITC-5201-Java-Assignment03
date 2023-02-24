@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.text.AttributeSet;
 
 import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 
 import data.*;
@@ -91,6 +92,12 @@ public class RandomUI extends JFrame {
                 add(createLowerPanel(), BorderLayout.SOUTH);
                 add(createLeftPanel(), BorderLayout.WEST);
                 add(createRightPanel(), BorderLayout.EAST);
+
+        }
+
+        public RandomUI(String path) {
+                this();
+                io = new RandomIO(path);
         }
 
         /**
@@ -127,7 +134,7 @@ public class RandomUI extends JFrame {
                 recordIDTF = new JTextField(middleTFColumn);
                 recordIDTF.setFont(btnFont);
                 recordIDTF.setVisible(true);
-                recordIDTF.setDocument(new LimitInputDocument(4, "[0-9]"));
+                // recordIDTF.setDocument(new LimitInputDocument(4, "[0-9]"));
                 recordIDTF.setPreferredSize(new Dimension(middleTFWidth, middleTFHeight));
 
                 /** First Name label */
@@ -139,7 +146,7 @@ public class RandomUI extends JFrame {
                 fnameTF = new JTextField(middleTFColumn);
                 fnameTF.setFont(btnFont);
                 fnameTF.setVisible(true);
-                fnameTF.setDocument(new LimitInputDocument(20, "[a-zA-Z]"));
+                // fnameTF.setDocument(new LimitInputDocument(20, "[a-zA-Z]"));
                 fnameTF.setPreferredSize(new Dimension(middleTFWidth, middleTFHeight));
 
                 /** Last Name label */
@@ -151,7 +158,7 @@ public class RandomUI extends JFrame {
                 lnameTF = new JTextField(middleTFColumn);
                 lnameTF.setFont(btnFont);
                 lnameTF.setVisible(true);
-                lnameTF.setDocument(new LimitInputDocument(25, "[a-zA-Z]"));
+                // lnameTF.setDocument(new LimitInputDocument(25, "[a-zA-Z]"));
                 lnameTF.setPreferredSize(new Dimension(middleTFWidth, middleTFHeight));
 
                 /** Age label */
@@ -163,7 +170,7 @@ public class RandomUI extends JFrame {
                 ageTF = new JTextField(middleTFColumn);
                 ageTF.setFont(btnFont);
                 ageTF.setVisible(true);
-                ageTF.setDocument(new LimitInputDocument(4, "[0-9]"));
+                // ageTF.setDocument(new LimitInputDocument(4, "[0-9]"));
                 ageTF.setPreferredSize(new Dimension(middleTFWidth, middleTFHeight));
 
                 /** Phone label */
@@ -175,7 +182,7 @@ public class RandomUI extends JFrame {
                 phoneTF = new JTextField(middleTFColumn);
                 phoneTF.setFont(btnFont);
                 phoneTF.setVisible(true);
-                phoneTF.setDocument(new LimitInputDocument(10, "[0-9]"));
+                // phoneTF.setDocument(new LimitInputDocument(10, "[0-9]"));
                 phoneTF.setPreferredSize(new Dimension(middleTFWidth, middleTFHeight));
 
                 /** Create gaps for group layout */
@@ -291,13 +298,13 @@ public class RandomUI extends JFrame {
                 bt1 = new JButton("Add");
                 bt1.setFont(btnFont);
                 bt1.setPreferredSize(new Dimension(160, 80));
-                // bt1.addActionListener(new AddListener());
+                bt1.addActionListener(new AddListener());
 
                 /** Button 2, Find */
                 bt2 = new JButton("Find");
                 bt2.setFont(btnFont);
                 bt2.setPreferredSize(new Dimension(160, 80));
-                // bt2.addActionListener(new FindListener());
+                bt2.addActionListener(new FindListener());
 
                 /** Display 2 Buttons */
                 lowerPanel.setLayout(new GridLayout(1, 2, 70, 50)); // grid layout, add layout according to add
@@ -320,170 +327,132 @@ public class RandomUI extends JFrame {
                 return rightPanel;
         }
 
-        // /** Input data type in format */
-        // /** recordID, fname, lname, age, phone */
-        // public boolean valiation() {
-        //         boolean result = false;
+        /** Add Button Listener */
+        class AddListener implements ActionListener {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                        // textField members to be validated
+                        JTextField[] textFields = { recordIDTF, fnameTF, lnameTF, ageTF, phoneTF };
 
-        //         if (recordIDTF.getText().length() == 0) {
-        //                 JOptionPane.showMessageDialog(middlePanel, "ID cannot be empty");
-        //                 result = false;
-        //         } else {
-        //                 result = true;
-        //         }
+                        // String message when the above textFields is empty.
+                        String[][] validationMsg = {
+                                        { "ID is required!", "[0-9]*", "ID is number only!" },
+                                        { "First name is required!", "[a-zA-Z]*",
+                                                        "First name is character only!" },
+                                        { "Last name is required!", "[a-zA-Z]*",
+                                                        "Last name is character only!" },
+                                        { "Age is required!", "[0-9]*", "Age is number only!" },
+                                        { "Phone is required!", "[0-9]*", "Phone is number only!" }
+                        };
+                        boolean flag = valiation(textFields, validationMsg);// validate inpute
 
-        //         if (fnameTF.getText().length() == 0) {
-        //                 JOptionPane.showMessageDialog(middlePanel, "First name cannot be empty");
-        //                 result = false;
-        //         } else {
-        //                 result = true;
-        //         }
-        //         if (lnameTF.getText().length() == 0) {
-        //                 JOptionPane.showMessageDialog(middlePanel, "Last name cannot be empty");
-        //                 result = false;
-        //         } else {
-        //                 result = true;
-        //         }
-        //         if (ageTF.getText().length() == 0) {
-        //                 JOptionPane.showMessageDialog(middlePanel, "Age cannot be empty");
-        //                 result = false;
-        //         } else {
-        //                 result = true;
-        //         }
-        //         if (phoneTF.getText().length() == 0) {
-        //                 JOptionPane.showMessageDialog(middlePanel, "Phone cannot be empty");
-        //                 result = false;
-        //         } else {
-        //                 result = true;
-        //         }
-
-        //         return result;
-        // }
-
-        // public Person createPerson(){
-        //        Person person = new Person();
-        //         person.setID(Integer.parseInt(recordIDTF.getText()));
-        //         person.setFirstName(fnameTF.getText());
-        //         person.set(fnameTF.getText());
-        //         person.setID(Integer.parseInt(recordIDTF.getText()));
-        //         person.setID(Integer.parseInt(recordIDTF.getText()));
-
-
-        //         return person;
-        // }
-
-        // /**
-        //  * Input data type in format
-        //  *
-        //  * I dont care do other places have any input, they will be covered by
-        //  * information after pressing button.
-        //  */
-        // public void findDataInput() {
-        //         if (recordIDTF.getText().length() == 0) {
-        //                 JOptionPane.showMessageDialog(middlePanel, "ID cannot be empty");
-        //         }
-        //         // else if ID not exit, show error
-        //         else {
-        //                 recordID = Integer.parseInt(recordIDTF.getText());
-        //         }
-        // }
-
-        // /** Add Button Listener */
-        // class AddListener implements ActionListener {
-        //         @Override
-        //         public void actionPerformed(ActionEvent e) {
-
-        //                 boolean flag = valiation();// 验证输入
-
-        //                 if (flag == true) {
-        //                         Person person = createPerson();
-        //                         response = io.addPerson(person);
-        //                         if (response.getSignal() == RadomSignal.SUCCESS) {
-        //                                 JOptionPane.showMessageDialog(middlePanel, response.getMessage());
-        //                         } else {
-        //                                 JOptionPane.showMessageDialog(middlePanel, response.getMessage());
-        //                         }
-        //                 }
-        //         }
-
-        // }
-
-        // class FindListener implements ActionListener {
-        //         @Override
-        //         public void actionPerformed(ActionEvent e) {
-
-        //                 try {
-        //                         /** Create Variables */
-        //                         findDataInput();
-
-        //                         try {
-        //                                 /** Call function and arraylist */
-        //                                 io.findPerson(recordID);
-        //                                 RandomResponse response1 = io.findPerson(recordID);
-        //                                 System.out.println(response1);
-        //                                 ArrayList<Person> resultList = response1.personList;
-        //                                 System.out.println(resultList);
-        //                                 System.out.println(resultList.size());
-        //                                 /** Use message Window to display results */
-        //                                 JOptionPane.showMessageDialog(middlePanel, "Find Person with ID: " +
-        //                                                 recordID);
-
-        //                                 // recordIDTF.setText("");
-        //                                 // fnameTF.setText("aaa");
-        //                                 // lnameTF.setText("bbb");
-        //                                 // ageTF.setText(String.valueOf(123));
-        //                                 // phoneTF.setText(String.valueOf(123456));
-
-        //                                 // recordIDTF.setText("");
-        //                                 fnameTF.setText(String.valueOf(resultList.get(1)));
-        //                                 lnameTF.setText(String.valueOf(resultList.get(2)));
-        //                                 ageTF.setText(String.valueOf(resultList.get(3)));
-        //                                 phoneTF.setText(String.valueOf(resultList.get(4)));
-
-        //                         } catch (Exception ex) {
-        //                                 ex.printStackTrace();
-        //                         }
-
-        //                 } catch (Exception ex) {
-        //                         ex.printStackTrace();
-        //                 }
-        //         }
-        // }
-
-        /**
-         * The inner class of Document, extending the super class of PlainDocument.
-         * The object of this class will be set to the textfield to limit the input.
-         */
-        class LimitInputDocument extends PlainDocument {
-
-                // private member
-                private int maxLen;
-                private String regex;
-
-                /**
-                 * Class constructor specifying the limitation of input.
-                 *
-                 * @param //maxLen THe max length of input
-                 * @param regex    The string of regex indicator
-                 */
-
-                LimitInputDocument(int maxLen, String regex) {
-                        this.maxLen = maxLen;
-                        this.regex = regex;
+                        if (flag == true) {// if valid
+                                Person person = formPerson();
+                                response = io.addPerson(person);
+                                if (response.getSignal() == RadomSignal.SUCCESS) {
+                                        JOptionPane.showMessageDialog(middlePanel, response.getMessage());
+                                        emptyTextField(textFields);
+                                } else {
+                                        JOptionPane.showMessageDialog(middlePanel, response.getMessage());
+                                }
+                        }
                 }
 
-                /**
-                 * Overrides the insertString() method of the super class.
-                 * The input is valid only when the total length of input is less than the
-                 * parameter maxlen and the input matched the regex.
-                 * Otherwise, the content in the textfield will not change.
-                 */
+        }
+
+        /** Find Button Listener */
+        class FindListener implements ActionListener {
                 @Override
-                public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
-                        // System.out.println(str);
-                        if (getLength() + str.length() <= maxLen && str.matches(regex)) {
-                                super.insertString(offset, str, attr);
+                public void actionPerformed(ActionEvent e) {
+                        // textField members to be validated
+                        JTextField[] textFields = { recordIDTF };
+
+                        // String message when the above textFields is empty.
+                        String[][] validationMsg = {
+                                        { "ID is required!", "[0-9]*", "ID is number only!" } };
+                        boolean flag = valiation(textFields, validationMsg);// validate inpute
+                        if (flag == true) {// if valid
+                                int recordNum = Integer.parseInt(recordIDTF.getText());
+                                response = io.findPerson(recordNum);
+                                if (response.getSignal() == RadomSignal.SUCCESS) {
+                                        JOptionPane.showMessageDialog(middlePanel, response.getMessage());
+                                        System.out.println(response.getPersonList().get(0));
+                                        bindTextField(response.getPersonList().get(0));
+                                } else {
+                                        JOptionPane.showMessageDialog(middlePanel, response.getMessage());
+                                }
                         }
                 }
         }
+
+        /**
+         * Valides a list of textfield, checking whether they are empty and match a
+         * specific regex.
+         * If mo valid, a prompt will be displayed.
+         * 
+         * @author Wenhao Fang
+         * @param textFields An array of JTextField objects.
+         * @param msgs       An 2 dimentional array contains prompt messages and
+         *                   regexes.
+         * @return True if all text fields are valid.
+         */
+        public boolean valiation(JTextField[] textFields, String[][] msgs) {
+                boolean result = true;
+                String promt = "";
+
+                for (int i = 0; i < textFields.length; i++) {// loop each text field object.
+                        String input = textFields[i].getText();
+                        // System.out.println("input:" + input);
+                        // System.out.println("isEmpty:" + input.isEmpty());
+                        if (input.length() == 0) {
+                                promt += String.format("<p>%s</p>", msgs[i][0]);// collect messages.
+                                result = false;
+                                continue;// jump to the next iteration.
+                        }
+
+                        String regex = msgs[i][1];
+                        // System.out.println("regex:" + regex);
+                        // System.out.println("match:" + input.matches(regex));
+                        if (!input.matches(regex)) {
+                                promt += String.format("<p>%s</p>", msgs[i][2]);
+                                result = false;
+                        }
+                }
+
+                if (!promt.isEmpty()) {// if prompt has content ,then display.
+                        JOptionPane.showMessageDialog(middlePanel,
+                                        String.format("<html><h3>Warning</h3>%s</html>", promt));
+                }
+
+                return result;
+        }
+
+        // create a person object from the gui
+        private Person formPerson() {
+                Person person = new Person();
+                person.setID(Integer.parseInt(recordIDTF.getText()));
+                person.setFirstName(fnameTF.getText());
+                person.setLastName(fnameTF.getText());
+                person.setAge(Integer.parseInt(ageTF.getText()));
+                person.setPhone(phoneTF.getText());
+
+                return person;
+        }
+
+        // empty all text field
+        private void emptyTextField(JTextField[] textFields) {
+                for (JTextField tf : textFields) {
+                        tf.setText("");
+                }
+        }
+
+        // bing data to all text field for a person object
+        public void bindTextField(Person person) {
+                recordIDTF.setText(Integer.toString(person.getID()).trim());
+                fnameTF.setText(person.getFirstName().trim());
+                lnameTF.setText(person.getLastName().trim());
+                ageTF.setText(Integer.toString(person.getAge()).trim());
+                phoneTF.setText(person.getPhone().trim());
+        };
+
 }
